@@ -207,6 +207,33 @@
 }
 
 /**
+ * Secondary button: indigo-500 fills from the bottom on hover.
+ * background-color stays the resting surface; the gradient grows over it.
+ */
+.aui-secondary-button-fill {
+  background-color: var(--secondary-button-bg);
+  background-image: linear-gradient(var(--color-indigo-500), var(--color-indigo-500));
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: 100% 0%;
+  transition-property: background-size, color, border-color, opacity;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+
+.aui-secondary-button-fill:hover:not(:disabled) {
+  background-size: 100% 100%;
+  border-color: var(--color-indigo-500);
+  color: var(--color-white);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aui-secondary-button-fill {
+    transition: none;
+  }
+}
+
+/**
  * Selected rail control / chat-history row: theme fill with 0.5px inside
  * gradient stroke (top → bottom).
  */
