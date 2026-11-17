@@ -13,11 +13,7 @@ import {
 
 import { useAui } from '../assistant-ui.js';
 import { DesktopOnlyNotice } from '../atoms/DesktopOnlyNotice.js';
-import {
-  auiButtonClass,
-  shellRailSelectedClassName,
-  sidebarRailButtonClassName,
-} from '../atoms/lib/buttonClasses.js';
+import { auiButtonClass, shellRailSelectedClassName, sidebarRailButtonClassName } from '../atoms/lib/buttonClasses.js';
 import { cn } from '../atoms/lib/cn.js';
 import { useIsMobile } from '../atoms/lib/useIsMobile.js';
 import { NamedAgentHeaderLabel } from '../atoms/NamedAgentHeaderLabel.js';
@@ -76,12 +72,9 @@ function RecentChatsAside({
       <aside
         id={recentHistoryPanelId}
         aria-label="Recent chats"
-        className={cn(
-          'hidden min-h-0 w-12 shrink-0 flex-col border-r border-border md:flex',
-          shellSurfaceBgClassName,
-        )}
+        className={cn('hidden min-h-0 w-12 shrink-0 flex-col border-r border-border md:flex', shellSurfaceBgClassName)}
       >
-        <div className="flex w-full items-start justify-center p-2">
+        <div className="flex min-h-14 w-full items-center justify-center border-b border-border px-2">
           <RailTooltip content="Open chat history">
             <button
               type="button"
@@ -219,19 +212,22 @@ function SidebarRail({
       data-slot="aui_app-rail"
       className={cn(
         railWidthClassName,
-        'flex min-h-0 shrink-0 flex-col py-1 text-sidebar-text',
+        'flex min-h-0 shrink-0 flex-col text-sidebar-text',
         shellChromeBgClassName,
         className,
       )}
       {...dialogProps}
     >
-      <div className="flex min-h-0 flex-1 flex-col items-center gap-4 px-2 pt-2">
-        <div className="flex size-9 shrink-0 items-center justify-center text-text-primary">
+      {/* pt-2 matches the padded shell inset; h-14 matches PageHeader / chat-history title. */}
+      <div className="flex shrink-0 flex-col items-center px-2 pt-2">
+        <div className="flex h-14 w-full shrink-0 items-center justify-center text-text-primary">
           <BrandLogo variant={chrome.collapsedVariant} className={brandLogoClassName} />
         </div>
+      </div>
+      <div className="flex min-h-0 flex-1 flex-col items-center gap-4 px-2 pt-2">
         <SidebarNav />
       </div>
-      <footer className="flex shrink-0 flex-col items-center gap-2 px-2 pb-2">
+      <footer className="flex shrink-0 flex-col items-center gap-2 px-2 py-2">
         <ShellActions iconOnly />
         <UserAvatar iconOnly />
       </footer>
@@ -365,16 +361,6 @@ export function SidebarLayout({ className }: { className?: string }) {
     <div className={cn('relative flex h-full min-h-0 w-full min-w-0', shellChromeBgClassName, className)}>
       <SidebarRail className="hidden md:flex" />
 
-      {showAgentConfig ? (
-        <aside
-          role="dialog"
-          aria-label="Agent Config"
-          className="absolute inset-y-0 left-0 z-20 w-full max-w-sm border-r border-border shadow-xl md:static md:z-auto md:max-w-140 md:flex-1 md:shadow-none 2xl:max-w-150"
-        >
-          <AgentConfigDrawerContainer />
-        </aside>
-      ) : null}
-
       {/* Desktop: 8px inset on top/right/bottom; flush to the icon rail on the left. */}
       <div className={cn('flex min-h-0 min-w-0 flex-1 flex-col md:pt-2 md:pr-2 md:pb-2', shellChromeBgClassName)}>
         <div
@@ -384,8 +370,19 @@ export function SidebarLayout({ className }: { className?: string }) {
             shellSurfaceBgClassName,
           )}
         >
-              <FilePreviewProvider>
+          <FilePreviewProvider>
             <div className="flex min-h-0 min-w-0 flex-1">
+              {/* New Agent config sits inside the shell beside the chat column (same card as New Agent). */}
+              {showAgentConfig ? (
+                <aside
+                  role="dialog"
+                  aria-label="Agent Config"
+                  className="flex min-h-0 w-full max-w-sm shrink-0 flex-col border-r border-border md:max-w-140 md:flex-1 2xl:max-w-150"
+                >
+                  <AgentConfigDrawerContainer />
+                </aside>
+              ) : null}
+
               {showRecentHistory ? (
                 <RecentChatsAside collapsed={recentHistoryCollapsed} onCollapsedChange={setRecentHistoryCollapsed} />
               ) : null}

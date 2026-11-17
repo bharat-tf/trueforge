@@ -39,7 +39,8 @@ export function ShellActions({
 
   const hoverClass = 'hover:bg-secondary-button-hover hover:text-ghost-button-text';
   const showLabels = labeled && !iconOnly;
-  const railClass = iconOnly ? sidebarRailButtonClassName : null;
+  // Match top rail nav: ghost defaults to text-ghost-button-text; override to sidebar-text.
+  const railClass = iconOnly ? cn(sidebarRailButtonClassName, 'text-sidebar-text') : null;
   const iconSize = iconOnly ? 16 : showLabels ? 14 : undefined;
   const wrapRail = (label: string, control: ReactElement) =>
     iconOnly ? <RailTooltip content={label}>{control}</RailTooltip> : control;
@@ -70,8 +71,7 @@ export function ShellActions({
             className: cn(
               hoverClass,
               railClass,
-              showLabels &&
-                'h-auto flex-col gap-0.5 px-1 py-1 text-[0.625rem] font-normal leading-tight',
+              showLabels && 'h-auto flex-col gap-0.5 px-1 py-1 text-[0.625rem] font-normal leading-tight',
             ),
           })}
           onClick={() => onAction?.()}
@@ -92,8 +92,7 @@ export function ShellActions({
             className: cn(
               hoverClass,
               railClass,
-              showLabels &&
-                'h-auto flex-col gap-0.5 px-1 py-1 text-[0.625rem] font-normal leading-tight',
+              showLabels && 'h-auto flex-col gap-0.5 px-1 py-1 text-[0.625rem] font-normal leading-tight',
             ),
           })}
           onClick={() => {
@@ -120,8 +119,7 @@ export function ShellActions({
                 className: cn(
                   hoverClass,
                   railClass,
-                  showLabels &&
-                    'h-auto flex-col gap-0.5 px-1 py-1 text-[0.625rem] font-normal leading-tight',
+                  showLabels && 'h-auto flex-col gap-0.5 px-1 py-1 text-[0.625rem] font-normal leading-tight',
                   shell.settingsOpen && shellRailSelectedClassName,
                 ),
               })}

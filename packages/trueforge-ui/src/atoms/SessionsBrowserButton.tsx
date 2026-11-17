@@ -43,10 +43,7 @@ export function SessionsBrowserButton({ className, compact = false }: SessionsBr
           'font-normal shadow-none hover:bg-secondary-button-hover hover:text-ghost-button-text',
           compact
             ? cn(sidebarRailButtonClassName, 'text-inherit')
-            : cn(
-                sidebarButtonRadiusClassName,
-                'h-8 w-full !justify-start px-2.5 text-sm text-sidebar-text',
-              ),
+            : cn(sidebarButtonRadiusClassName, 'h-8 w-full !justify-start px-2.5 text-sm text-sidebar-text'),
           sessionsOpen && shellRailSelectedClassName,
         ),
       })}
@@ -64,7 +61,7 @@ export function SessionsBrowserButton({ className, compact = false }: SessionsBr
         shell.setSessionsOpen(true);
       }}
     >
-      <Icon name="message-square-text" size={compact ? 16 : undefined} />
+      <Icon name="layers-2" size={compact ? 16 : undefined} />
       {compact ? null : (
         <>
           <span className="truncate">Sessions</span>

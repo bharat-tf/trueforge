@@ -766,7 +766,7 @@ export function AgentsLibrary({ onSelectAgent, headerStart }: AgentsLibraryProps
   return (
     <div className="flex h-full min-h-0 w-full flex-col bg-card-bg">
       <PageHeader
-        title="Agents"
+        title="Agents Registry"
         start={headerStart}
         end={
           <div className="w-56 shrink-0">

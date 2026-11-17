@@ -37,7 +37,7 @@ export function UserAvatar({ labeled = false, iconOnly = false, className }: Use
         className,
       )}
     >
-      <Avatar size="sm">
+      <Avatar size="sm" className="h-6 w-6">
         <AvatarFallback>{getUserInitials(displayName)}</AvatarFallback>
       </Avatar>
       {iconOnly ? null : (

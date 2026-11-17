@@ -24,9 +24,9 @@ const baseClasses =
 /** Sidebar / list nav control corner radius: 12px. */
 export const sidebarButtonRadiusClassName = 'rounded-[0.75rem]';
 
-/** Icon-only app rail control: 36×36 with 16px glyphs. */
+/** Icon-only app rail control: 36×36 circle with 16px glyphs. */
 export const sidebarRailButtonClassName = cn(
-  'rounded-[0.5rem]',
+  'rounded-full',
   'size-9 shrink-0 !justify-center p-0 font-normal shadow-none hover:bg-secondary-button-hover hover:text-ghost-button-text [&_svg]:size-4',
 );
 
@@ -36,7 +36,7 @@ export const shellSelectedClassName = 'aui-shell-selected rounded-[0.5rem]';
 /** Active icon-rail control: selected chrome + primary text on hover. */
 export const shellRailSelectedClassName = cn(
   shellSelectedClassName,
-  'font-medium hover:text-text-primary',
+  'rounded-full font-medium hover:text-text-primary',
 );
 
 /** Icon-rail hover label: pill to the right of the control (black / #343439). */

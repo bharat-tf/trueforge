@@ -46,6 +46,7 @@
     --color-gray-800: #27272a;
     --color-gray-850: #18181b;
     --color-gray-1000: #09090b;
+    --color-indigo-200: #c7d2fe;
     --color-indigo-500: #6366f1;
     --color-red-500: #ef4444;
 
@@ -95,10 +96,13 @@
     /* Light: primary base + lighter flash (secondary→primary reads as a darkening pulse). */
     --text-shimmer-base: var(--text-primary);
     --text-shimmer-highlight: var(--color-gray-300);
-    /* Active rail / chat-history row: fill + vertical gradient stroke. */
+    /* Active rail / chat-history row: fill + indigo-200 stroke (Tailwind). */
     --shell-selected-bg: var(--secondary-button-hover);
-    --shell-selected-stroke-start: var(--color-gray-300);
-    --shell-selected-stroke-end: var(--color-gray-400);
+    --shell-selected-stroke-start: var(--color-indigo-200);
+    --shell-selected-stroke-end: var(--color-indigo-200);
+    /* Composer hairline (light): faded primary → solid primary, top → bottom. */
+    --composer-stroke-start: color-mix(in oklab, var(--primary-button-bg) 25%, transparent);
+    --composer-stroke-end: var(--primary-button-bg);
   }
 
   .aui-theme-root *,
@@ -174,7 +178,32 @@
     --shell-selected-bg: var(--secondary-button-hover);
     --shell-selected-stroke-start: var(--color-gray-500);
     --shell-selected-stroke-end: var(--color-gray-300);
+    /* Figma composer stroke flipped 180°: zinc-600 (#52525B) → #3F3F46, top → bottom. */
+    --composer-stroke-start: var(--color-gray-400);
+    --composer-stroke-end: var(--color-gray-300);
   }
+}
+
+/**
+ * Composer shell: theme surface + vertical gradient hairline stroke.
+ * padding-box paints the fill; border-box bleeds the ramp into the transparent border.
+ * Light: 1px (original). Dark: Figma 0.5px stroke weight.
+ */
+[data-slot='aui_composer-shell'] {
+  border-width: 0.0625rem;
+  background:
+    linear-gradient(var(--input-box-bg), var(--input-box-bg)) padding-box,
+    linear-gradient(
+      to bottom,
+      var(--composer-stroke-start),
+      var(--composer-stroke-end)
+    )
+    border-box;
+  background-origin: border-box;
+}
+
+.aui-theme-root.dark [data-slot='aui_composer-shell'] {
+  border-width: 0.03125rem;
 }
 
 /**

@@ -590,7 +590,7 @@ describe('SidebarLayout', () => {
       fireEvent.click(
         within(screen.getByRole('dialog', { name: 'Navigation' })).getByRole('button', { name: /^Agents/ }),
       );
-      const agentsHeading = await screen.findByRole('heading', { name: 'Agents' });
+      const agentsHeading = await screen.findByRole('heading', { name: 'Agents Registry' });
       expect(agentsHeading.previousElementSibling).toBe(screen.getByRole('button', { name: 'Navigation' }));
     } finally {
       Object.defineProperty(window, 'matchMedia', { configurable: true, value: originalMatchMedia });
